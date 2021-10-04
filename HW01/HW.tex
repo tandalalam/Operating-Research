@@ -1,0 +1,521 @@
+\documentclass[12pt]{article}
+\usepackage[hidelinks]{hyperref}
+\usepackage{HomeWorkTemplate}
+\usepackage{circuitikz}
+\usepackage[shortlabels]{enumitem}
+\usepackage{hyperref}
+\usepackage{tikz}
+\usepackage{xepersian}
+%\usepackage{lineno}
+%\usepackage{xcolor}
+%\usepackage[colorlinks]{hyperref}
+%\usepackage{color}
+\usetikzlibrary{arrows,automata}
+\usetikzlibrary{circuits.logic.US}
+\settextfont{HM XNiloofar}
+\setdigitfont{HM XNiloofar}
+\usepackage{changepage}
+%\usepackage[inline]{enumitem}
+\newcounter{problemcounter}
+\newcounter{solutioncounter}
+%\newcounter{subproblemcounter}
+\newcounter{judgmentcounter}
+\newcounter{judgmentanswercounter}
+\setcounter{problemcounter}{1}
+\setcounter{solutioncounter}{1}
+\setcounter{judgmentcounter}{1}
+\setcounter{judgmentanswercounter}{1}
+%\setcounter{subproblemcounter}{1}
+\newcommand{\problem}[1]
+{
+	\subsection*{
+		سوال
+		\arabic{problemcounter} 
+		\stepcounter{problemcounter}
+		%\setcounter{subproblemcounter}{1}
+		#1
+	}
+}
+\newcommand{\solution}[1]
+{
+	\subsection*{
+		پاسخ سوال 
+		\arabic{solutioncounter} 
+		\stepcounter{solutioncounter}
+		%\setcounter{subproblemcounter}{1}
+		#1
+	}
+}
+
+\newcommand{\judgment}[1]
+{
+	\subsection*{
+		داوری سوال 
+		\arabic{judgmentcounter} 
+		\stepcounter{judgmentcounter}
+		%\setcounter{subproblemcounter}{1}
+		#1
+	}
+}
+
+\newcommand{\judgmentanswer}[1]
+{
+	\subsection*{
+		پاسخ داوری سوال 
+		\arabic{judgmentanswercounter} 
+		\stepcounter{judgmentanswercounter}
+		%\setcounter{subproblemcounter}{1}
+		#1
+	}
+}
+
+%\newcommand{\subproblem}{
+%	\textbf{\harfi{subproblemcounter})}\stepcounter{subproblemcounter}
+%}
+
+
+
+
+\begin{document}
+\handout
+{تحقیق در عملیات 1}
+{تمرین سری یک}
+{میلاد یزدانی، مازیار شمسی‌پور، هادی هادوی و محمد ترابی }
+{3}
+{}
+\problem{} 
+مسئله‌ی بهینه‌سازی خطی، شامل قدر مطلق، به فرم زیر را در نظر بگیرید:
+\begin{equation*}
+	\left\{
+	\begin{array}{cll}
+		\min_{x,y} &  \mathbf{c'x + d'y} \\
+		\mathrm{s.t.} & \mathbf{Ax}  + \mathbf{By} \le \mathbf{b}\\
+		& y_i = |x_i| & \forall i .
+	\end{array}  \right.
+\end{equation*}
+فرض کنید تمام درایه‌های $\mathbf{B}$ و $\mathbf{d}$ نامنفی باشند.
+
+\begin{enumerate}[(a)]
+	\item 
+	با توجه به مطالب مطرح شده، دو نحوه‌ی فرمول‌بندی به صورت مسئله‌ی بهینه‌سازی خطی، برای مسئله‌ی ذکر شده ارائه دهید.
+	\item 
+نشان دهید که مسئله‌ی اصلی و دو نحوه‌ی فرمول‌بندی  شما معادل هستند.(یعنی یا هر سه مسئله نشدنی‌ هستند و یا هر سه پاسخ بهینه‌ی یکسان دارند.)
+	\item 
+	مثالی ارائه دهید برای اینکه اگر $\mathbf{B}$ درایه‌ی منفی داشته باشد آنگاه مسئله ممکن است کمینه‌ی موضعی داشته باشد که کمینه‌ی کلی نباشد.
+\end{enumerate}
+
+
+\solution{}
+\begin{enumerate}[(a)]
+	\item 
+
+	در واقع مسئله را میتوان به صورت های زیر نوشت :
+	\begin{enumerate}[(I)]
+		\item 
+		\begin{equation*}
+		\left\{
+		\begin{array}{cll}
+		\min_{x,y} &  \mathbf{c'x + d'y} \\
+		\mathrm{s.t.} & \mathbf{Ax}  + \mathbf{By} \le \mathbf{b}\\
+		& x_i \ge y_i & \forall i,\\
+		& -x_i \ge -y_i & \forall i,\\
+		& y_i \ge 0 & \forall i.
+		\end{array}  \right.  
+		\end{equation*}
+		
+		\item 
+		
+		با توجه به توضیحات گفته شده در کلاس می‌توانیم با جایگذاری 
+		$\mathbf{x} = \mathbf{x^+} - \mathbf{x^-}$
+		و 
+		$\mathbf{|x|} = \mathbf{x^+} + \mathbf{x^-}$
+		مسئله را به فرم زیر بازنویسی کنیم.\footnote{منظور از $\mathbf{x^+}$
+		این است که ترم مثبت تک‌تک درایه‌های بردار $\mathbf{x}$ را محاسبه می‌کنیم همینطور برای $\mathbf{x^-}$ و $\mathbf{|x|}$ نیز تعریف مشابه داریم.}
+		\\
+		\begin{equation*}
+		\left\{
+		\begin{array}{cll}
+		\min_{x^+,x^-} &  \mathbf{c'(x^+ - x^-) + d'(x^+ + x^-)} \\
+		\mathrm{s.t.} & \mathbf{A(x^+ - x^-)}  + \mathbf{B(x^+ + x^-)} \le \mathbf{b}\\
+		& x_i^+ \ge 0 & \forall i,\\
+		& x_i^- \ge 0 & \forall i.
+		\end{array}  \right.  
+		\end{equation*}
+	\end{enumerate}
+
+	\item 
+در نظر داشته باشید که مجموعه‌ی شدنی فرم اصلی مسئله را با
+$F_1$،
+مجموعه‌ی شدنی فرم(I) را با
+$F_2$
+ و مجموعه‌ی شدنی فرم(II) را با
+$F_3$
+تعریف می‌کنیم. اولاً نشان ‌می‌دهیم به ازای هر عضو 
+$F_1$
+،
+وجود دارد عضوی از 
+$F_2$
+که تابع‌های هزینه‌ی هر دو مسئله برابر  میشوند و برعکس. 
+\textbf{اثبات:}
+
+کافیست
+$\mathbf{x}^{(1)} = \mathbf{x}^{(2)} , \mathbf{y}^{(1)} = \mathbf{y}^{(2)}$
+در نظر بگیریم. واضح است که اگر 
+$(\mathbf{x}^{(1)}, \mathbf{y}^{(1)})  \in F_1$ 
+آنگاه
+$(\mathbf{x}^{(2)}, \mathbf{y}^{(2)})  \in F_2$ 
+و برعکس.
+چرا که برای هر دو عدد حقیقی $x$ و $y$ داریم:
+$$ |x| = y  \Leftrightarrow \; x \leq y \; \wedge \; -x \leq -y \; \wedge \; y \geq 0$$
+بنابراین دو مسئله معادل هستند و بنابراین اگر هرکدام پاسخ بهینه‌ای داشته باشند، دیگری نیز همان پاسخ بهینه‌ را خواهد داشت.(طبق لم اثبات شده در کلاس)
+
+
+ثانياً نشان می‌دهیم که اگر پاسخ بهینه‌‌‌ی 
+$(\mathbf{x}, \mathbf{y})  \in F_1$ 
+باشد آنگاه پاسخ 
+$(\mathbf{x}^+, \mathbf{x}^-)  \in F_3$ 
+وجود دارد و برعکس؛ که برای آن‌ها تابع هزینه‌ی دو مسئله برابر می‌شوند. 
+\textbf{اثبات:}
+ابتدا فرض کنیم که 
+$(\mathbf{x}, \mathbf{y})  \in F_1$ 
+پاسخ بهینه‌ی مسئله‌ی اصلی باشد،
+بردارهای 
+$\mathbf{x^+}, \mathbf{x^-}$
+را به صورت زیر ایجاد می‌کنیم:
+$$ x_i^+= \max(x, 0) \; , x_i^-=\max(-x, 0) \; \; \forall i$$
+که در شرط 
+$x_i^+ , x_i^- \geq 0$
+صدق می‌کنند. و چون با توجه به این تعریف 
+$\mathbf{y} = |\mathbf{x}| =  \mathbf{x^+} + \mathbf{x^-}$
+به سادگی می‌توان دید که تابع هزینه در دو حالت با هم برابر می‌شوند.
+
+حال فرض کنیم 
+$(\mathbf{x}^+, \mathbf{x}^-)  \in F_3$  
+پاسخ بهینه‌ی مسئله فرم (II) باشد، ادعا می‌کنیم به‌ ازای هر $i$ حداقل یکی از 
+$x_i^+, x_i^-$
+صفر خواهد بود و یا می‌توان بدون افزایش تابع هزینه یکی از آن‌ها را صفر کرد. \textbf{اثبات:}
+فرض کنیم $i$ وجود دارد که $x_i^+ , x_i^- > 0$، بدون کم شدن از کلیت اثبات در نظر بگیرید 
+ $x_i^+ \ge x_i^-$
+ و بنابراین:
+	$$ \exists \epsilon > 0, r \ge 0 : x_i^+ = \epsilon + r, x_i^- = \epsilon $$
+	آنگاه می‌توانیم بنویسیم:
+	$$A_{ji}r + B_{ji}(2\epsilon + r) \le b_j \; \; \forall j$$ 
+	$$ B_{ji} \ge 0 \Rightarrow A_{ji}r + B_{ji}r \le b_j$$
+	همچنین چون
+	 $d_i \ge 0$
+	 خواهیم داشت:
+	 $$ d_i(2\epsilon + r) \ge d_ir \Rightarrow 
+	 c_ir + d_i(2\epsilon + r) \ge c_ir + d_ir $$
+	 $$ \Rightarrow c_i(x_i^+ - x_i^-) + d_i(x_i^+ + x_i^-) \ge c_i(r - 0) + d_i (r + 0) $$ 
+	 بنابراین جواب بهینه‌ی مسئله‌(II) به صورتی خواهد شد(یا می‌توان جواب معادلی در نظر گرفت) که برای هر $i$ یکی از $x_i^+, x_i^-$ صفر خواهد بود و این به ما اجازه می‌دهد که بردارهای 
+	 $(\mathbf{x}, \mathbf{y}) \in F_1$
+	 را به صورت زیر ایجاد کنیم:
+	 $$ x_i = x_i^+ - x_i^- , y_i = x_i^+ + x_i^- \; \; \forall i $$
+	 و چون 
+	 $x_i^-, x_i^+ \ge 0$
+	 و یکی از آن‌ها حتما صفر است، واضح است که 
+	 $y_i = |x_i|$
+	 و بنابراین جوابی در 
+	 $F_1$
+	 پیدا می‌شود.
+	\item
+برای سادگی مسئله‌ی بهینه‌سازی شامل تک عدد $x, |x|$ به صورت زیر را در نظر بگیریم. 
+
+\begin{equation*}
+	\left\{
+	\begin{array}{cll}
+		\min_{x,y} &  0.5 x + |x| \\
+		\mathrm{s.t.} & -|x| \le -1\\
+	\end{array}  \right.
+\end{equation*}
+
+میتوان دید که این مسئله در نقطه 
+$x=1$
+دارای مینیمم موضعی است که مقدار تابع برابر $1.5$ است اما مینیمم کلی نیست. 
+\\
+به طور کلی زمانی که مقادیر $\mathbf{B}$ بزرگتر از صفر است ، میتوان به جای 
+$|x|=y$
+عبارت 
+$y\geq |x|$
+قرار داد زیرا مقادیر 
+$\mathbf{d}$ 
+مثبت است و با قرار دادن عبارت بالا پاسخ معادلات تغییر نمی‌کند. با توجه به فرض بالا میتوان گفت که معادله ای محدب داریم که طبق لم کتاب مینیمم موضعی همان مینیمم کلی است اما زمانی که $\mathbf{B}$ مقادیر منفی نیز داشته باشد دیگر معادله محدب نیست و لزوما هر مینمم موضعی ، مینمم کلی نیست.
+\\
+\end{enumerate}
+\newpage
+\problem{} 
+فرض کنید تابع 
+$f:\mathbb{R}^n \rightarrow \mathbb{R}$
+همزمان محدب و مقعر باشد. ثابت کنید $f$ یک تابع آفین است.
+\solution{}
+تابع 
+$g(\mathbf{x}) = f(\mathbf{x}) -f(0)$
+ را تعریف می‌کنیم. اولاً
+$g(0) = f(0) - f(0) = 0$.
+ثانیاً ادعا می‌کنیم که از آنجایی که $f$ هم مقعر و هم محدب است $g$ نیز همینگونه خواهد بود. 
+\textbf{اثبات}:
+چون $f$ محدب است پس داریم:
+
+$$f(\lambda \mathbf{x} + (1-\lambda)\mathbf{y}) \leq \lambda f(\mathbf{x}) + (1-\lambda) f(\mathbf{y})$$
+$$f(\lambda \mathbf{x} + (1-\lambda)\mathbf{y}) - f(0) \leq \lambda f(\mathbf{x}) + (1-\lambda) f(\mathbf{y}) - f(0)$$
+$$f(\lambda \mathbf{x} + (1-\lambda)\mathbf{y}) - f(0) \leq \lambda (f(\mathbf{x}) - f(0)) + (1-\lambda) (f(\mathbf{y}) - f(0))$$
+$$g(\lambda \mathbf{x} + (1-\lambda)\mathbf{y}) \leq \lambda g(\mathbf{x}) + (1-\lambda) g(\mathbf{y})$$
+
+و بنابراین $g$ محدب است. مشابه این اثبات را برای حالت مقعر بودن خواهیم داشت. بنابراین از آنجایی که $g$ هم محدب است و هم مقعر برای هر $\lambda \in (0,1)$ خواهیم داشت:
+$$g(\lambda \mathbf{x} + (1-\lambda)\mathbf{y}) \leq \lambda g(\mathbf{x}) + (1-\lambda) g(\mathbf{y})$$
+و
+$$g(\lambda \mathbf{x} + (1-\lambda)\mathbf{y}) \geq \lambda g(\mathbf{x}) + (1-\lambda) g(\mathbf{y})$$
+از دو نامساوی بالا می‌توان نتیجه گرفت:
+$$g(\lambda \mathbf{x} + (1-\lambda)\mathbf{y}) = \lambda g(\mathbf{x}) + (1-\lambda) g(\mathbf{y})$$
+با در نظر داشتن این تساوی؛ اولاً ادعا می‌کنیم که برای هر $\lambda \in \mathbb{R}$ داریم 
+$g(\lambda\mathbf{x}) = \lambda g(\mathbf{x})$.
+\textbf{اثبات:}
+
+برای حالت 
+$\lambda = 0$
+یا
+$\lambda = 1$
+به سادگی دیده می‌شود. حال فرض کنیم که
+  $ \lambda \in (0,1) $
+آنگاه خواهیم داشت:
+$$ g(\lambda \mathbf{x}) = g(\lambda \mathbf{x} + (1-\lambda)0) = \lambda(g\mathbf{x}) + (1-\lambda)g(0) = \lambda g(\mathbf{x}) $$
+
+همینطور اگر
+$\lambda > 1$
+آنگاه
+$ \dfrac{1}{\lambda} \in (0,1) $
+و بنابراین:
+$$ g(\mathbf{x}) = g(\frac{1}{\lambda}(\lambda \mathbf{x}) + (1 - \frac{1}{\lambda})0) = \frac{1}{\lambda}g(\lambda\mathbf{x}) + (1 - \frac{1}{\lambda})g(0) = \frac{1}{\lambda}g(\lambda\mathbf{x}) $$
+$$ \Rightarrow \lambda g(\mathbf{x}) = g(\lambda \mathbf{x})$$
+و نهایتاً برای حالت
+$\lambda < 0$ 
+ابتدا نشان می‌دهیم 
+$g(-\mathbf{x}) = -g(\mathbf{x})$:
+$$ 0 = g(0) = g(\frac{1}{2}\mathbf{x} + (1-\frac{1}{2})-\mathbf{x}) = 
+\frac12 g(\mathbf{x}) + \frac{1}{2}g(\mathbf{-x}) $$
+$$ \Rightarrow g(\mathbf{-x}) = -g(\mathbf{x}) $$
+و با توجه به این برای $\lambda < 0$ چون 
+$-\lambda > 0$
+می‌توانیم بنویسیم:
+$$ g(\lambda \mathbf{x}) = g(-\lambda -\mathbf{x}) = -\lambda g(-\mathbf{x}) = \lambda (\mathbf{x}) $$
+
+
+ثانیاً ادعا می‌کنیم که برای هر 
+$\mathbf{a,b} \in \mathbb{R}^n$
+داریم 
+$g(\mathbf{a+b}) = g(\mathbf{a}) + g(\mathbf{b})$.
+\textbf{اثبات:}
+$$ g(\mathbf{a+b}) = g(\frac{1}{2}2\mathbf{a} +\frac12 2\mathbf{b}) = 
+\frac12 g(2\mathbf{a}) + \frac12 g(2\mathbf{b}) = g(\mathbf{a}) + g(\mathbf{b}) $$
+که تساوی آخر را قبلاً اثبات کردیم.حال پایه‌ی استاندارد را در نظر می‌گیرم و برای هر $i$ تعریف کنیم $a_i = g(e_i)$.
+بنابراین برای هر 
+$\mathbf{x} \in \mathbb{R}^n$
+خواهیم داشت:
+$$ g(\mathbf{x}) = g(\sum_{i=1}^{n} x_ie_i) = \sum_{i=1}^{n} g(x_ie_i) =
+\sum_{i=1}^{n} x_ig(e_i) = \sum_{i=1}^{n} x_ia_i $$
+و از آنجایی که طبق تعریف اولیه
+ $g(\mathbf{x}) =f(\mathbf{x}) - f(0)$
+ پس:
+ $$ f(\mathbf{x}) =  \sum_{i=1}^{n} x_ia_i + f(0) $$
+ که یک تابع آفین است.
+
+\newpage
+\problem{} 
+برای دو مسئله‌ی کنترل راکت مطرح شده که در یکی هدف کمینه‌ شدن مجموع سوخت مصرفی در هر لحظه و در دیگری کمینه‌ شدن بیشینه‌ی مصرف سوخت در تمام لجظات بود، فرم برنامه‌ریزی خطی ارائه دهید. 
+\solution{}
+برای مسئله‌ی اول داریم:
+\begin{equation*}
+\left\{
+	\begin{array}{cll}
+		\min_a \; & \sum_{t=0}^{T-1} |a_t|\\
+		\mathrm{s.t.} &	x_0=0,\\
+		& v_0=0,\\
+		& x_{t+1}=x_t+v_t, & t=0,\ldots,T-1\\
+		& v_{t+1}=v_t+a_t, & t=0,\ldots,T-1\\
+		& x_T=1, \\
+		& v_T=0.
+	\end{array}   
+	\right.    
+\end{equation*}
+حال در نظر می‌گیریم
+$z_t=|a_t|$
+پس داریم:
+\begin{equation*}
+\left\{
+	\begin{array}{cll}
+		\min_z \;&  \sum_{t=0}^{T-1} z_t\\
+		\mathrm{s.t.} & a_t\leq z_t, & t=0,\ldots,T-1\\
+		& -a_t\leq z_t, & t=0,\ldots,T-1\\
+		& x_0=0,\\
+		& v_0=0,\\
+		& x_{t+1}=x_t+v_t & t=0,\ldots,T-1\\
+		& v_{t+1}=v_t+a_t & t=0,\ldots,T-1\\
+		& x_T=1,\\
+		& v_T=0.
+	\end{array}  
+	\right.     
+\end{equation*}
+حال برای مسئله‌ی دوم می‌خواهیم مقدار تابع 
+$\max_{t}|a_t|=z$
+را مینیمم کنیم، پس داریم:
+\begin{equation*}
+\left\{ 
+	\begin{array}{cll}
+		\min & z\\
+		\mathrm{s.t.} & a_t\leq z & t=0,\ldots,T-1\\
+		& -a_t\leq z & t=0,\ldots,T-1\\
+		& x_0=0\\
+		& v_0=0\\
+		& x_{t+1}=x_t+v_t & t=0,\ldots,T-1\\
+		& v_{t+1}=v_t+a_t & t=0,\ldots,T-1\\
+		& x_T=1\\
+		& v_T=0
+	\end{array}   
+	\right.    
+\end{equation*}
+\\
+\newpage
+\problem{} 
+یک کارخانه دو نوع محصول ارائه می‌دهد. محصول اول نیازمند
+ $\frac14$
+ ساعت
+ مونتاژ و 
+ $\frac18$
+ ساعت تست محصول است و هزینه‌ی مواد خام برای ایجاد این محصول $1.2$ دلار است. محوصل دوم اما نیاز به 
+ $\frac13$
+ ساعت مونتاژ و
+ $\frac13$
+ ساعت تست محصول دارد و هزینه‌ی مواد خام آن $0.9$ دلار است. کارمندان فعلی این کارخانه حداکثر ۹۰ ساعت در بخش مونتاژ و حداکثر ۸۰ ساعت در بخش تست می‌توانند فعالیت داشته باشند. همینطور قیمت محصولات این کارخانه در بازار به ترتیب ۹ دلار و ۸ دلار است.
+ 
+\begin{enumerate}[(a)]
+	\item 
+	مسئله‌ی بیشینه‌ی کردن سود روزانه‌ی این کارخانه را در قالب مسئله‌ی برنامه‌ریزی خطی بیان کنید.
+	\item 
+	دو تغییر زیر در مسئله را در نظر بگیرید:
+	\begin{enumerate}[(i)]
+		\item 
+		حداکثر ۵۰ ساعت دیگر می‌تواند به زمان مونتاژ این کارخانه اضافه شود که هر ساعت برای کارخانه ۷ دلار هزینه‌ی اضافی خواهد داشت.
+		\item 
+		فرض کنید که تامین کننده‌ی مواد اولیه در صورتی که خرید روزانه‌ی کارخانه بیشتر از ۳۰۰ دلار باشد، ۱۰ درصد تخفیف می‌دهید.
+	\end{enumerate}
+کدام یک از حالت‌های بالا به سادگی تبدیل به مسئله‌ی بهینه‌سازی خطی می‌شود و چطور؟ اگر یکی از مسائل یا هردو به سادگی تبدیل نمی‌شوند بگویید با چه روش دیگری می‌توان مسئله را حل کرد.
+\end{enumerate} 
+
+\solution{}
+\begin{enumerate}[(a)]
+	\item 
+	چون تعداد کالا همیشه عددی نامنفی است پس داریم 
+	
+	\begin{equation}
+		p1\geq 0 \; \& \; p2\geq 0
+	\end{equation}
+	و همچنین برای زمان سر هم و تست کردن وکالا ها داریم :
+	\begin{equation}
+		\frac{1}{4} p_1 + \frac{1}{3} p_2  \leq  90 
+	\end{equation}
+	\begin{equation}
+		\frac{1}{8} p_1 + \frac{1}{3} p_2  \leq  80 
+	\end{equation}
+	و از طرفی سود برابر است با جمع درآمد حاصل از فروش منهای هزینه مواد اولیه:
+	\begin{equation}
+		Max \; \; z\; = \; 9p_1+8p_2-1.2p_1-0.9p_2=7.8p_1+7.1p_2 
+	\end{equation}
+	\\
+	
+	\item 
+	$(i)$
+	\\
+	معادله (7) به شکل زیر بازنویسی میشود :
+	\\
+	\begin{equation}
+		\frac{1}{4} p_1 + \frac{1}{3} p_2  \leq  90 +n\\ \;\;\;\;
+		0\leq n \leq 50
+	\end{equation}
+	و همچنین سود برابر میشود با 
+	\begin{equation}
+		Max \; \; z\; = \; 7.8p_1+7.1p_2-7n
+	\end{equation}
+	پس معادله کلی این قسمت برابر است با :
+	\begin{equation}
+		\begin{cases}
+			Max \; \; z\; = \; 7.8p_1+7.1p_2-7n
+			\\
+			\frac{1}{4} p_1 + \frac{1}{3} p_2  \leq  90+n
+			\\
+			n\leq 50 
+			\\
+			n\geq 0
+			\\
+			\frac{1}{8} p_1 + \frac{1}{3} p_2  \leq  80 
+			\\
+			p_1\geq 0
+			\\
+			p_2\geq 0
+		\end{cases}       
+	\end{equation}
+	پس قسمت اول را به صورت خطی می‌توان نوشت .
+	\\
+	$(ii)$
+	\\
+	برای قسمت دوم تعریف می کنیم 
+	\begin{equation}
+		r=\;
+		\begin{cases}
+			0.9(1.2p_1+0.9p_2) &‌ r> 300
+			\\
+			1.2p_1+0.9p_2  & 0\leq r \leq 300
+		\end{cases}       
+	\end{equation}
+	و سود شرکت برابر میشود با :
+	\begin{equation}
+		z=9p_1+8p_2-r      
+	\end{equation}
+	چون دو حالت داریم پس می‌توانیم دو معادله زیر را حل کرده و سپس ماکزیمم دو جواب معادله را به عنوان جواب ارائه دهیم.
+	یعنی :
+	\begin{equation}
+		LP_1=
+		\begin{cases}
+			S_1=Max \; \; z\;= \; 9p_1+8p_2-r
+			\\
+			\frac{1}{4} p_1 + \frac{1}{3} p_2  \leq  90
+			\\
+			\frac{1}{8} p_1 + \frac{1}{3} p_2  \leq  80 
+			\\
+			p_1\geq 0
+			\\
+			p_2\geq 0
+			\\
+			r\leq 300
+			\\
+			r\geq 0
+			\\
+			r=1.2p_1+0.9p_2
+		\end{cases}       
+	\end{equation}
+	\begin{equation}
+		LP_2=
+		\begin{cases}
+			S_2=Max \; \; z\;= \; 9p_1+8p_2-r
+			\\
+			\frac{1}{4} p_1 + \frac{1}{3} p_2  \leq  90
+			\\
+			\frac{1}{8} p_1 + \frac{1}{3} p_2  \leq  80 
+			\\
+			p_1\geq 0
+			\\
+			p_2\geq 0
+			\\
+			r> 300
+			\\
+			r=0.9(1.2p_1+0.9p_2)
+		\end{cases}       
+	\end{equation}
+	حال پس از حل دو معادله جواب کلی برابر است با
+	\begin{equation}
+		S=Max(S_1,S_2)
+	\end{equation}
+	یعنی معادله بالا ابتدا خطی نبود ولی با جدا کردن دو قسمت می‌توان آن را خطی و سپس حل کرد.
+	
+\end{enumerate}
+
+\end{document}

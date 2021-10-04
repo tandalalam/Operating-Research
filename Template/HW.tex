@@ -1,0 +1,145 @@
+\documentclass[12pt]{article}
+\usepackage{HomeWorkTemplate}
+\usepackage{circuitikz}
+\usepackage[shortlabels]{enumitem}
+\usepackage{hyperref}
+\usepackage{tikz}
+\usepackage{xepersian}
+%\usepackage{lineno}
+%\usepackage{xcolor}
+%\usepackage[colorlinks]{hyperref}
+%\usepackage{color}
+\usetikzlibrary{arrows,automata}
+\usetikzlibrary{circuits.logic.US}
+\settextfont{HM XNiloofar}
+\setdigitfont{HM XNiloofar}
+\usepackage{changepage}
+%\usepackage[inline]{enumitem}
+\newcounter{problemcounter}
+\newcounter{solutioncounter}
+%\newcounter{subproblemcounter}
+\newcounter{judgmentcounter}
+\newcounter{judgmentanswercounter}
+\setcounter{problemcounter}{1}
+\setcounter{solutioncounter}{1}
+\setcounter{judgmentcounter}{1}
+\setcounter{judgmentanswercounter}{1}
+%\setcounter{subproblemcounter}{1}
+\newcommand{\problem}[1]
+{
+	\subsection*{
+		سوال
+		\arabic{problemcounter} 
+		\stepcounter{problemcounter}
+		%\setcounter{subproblemcounter}{1}
+		#1
+	}
+}
+\newcommand{\solution}[1]
+{
+	\subsection*{
+		پاسخ سوال 
+		\arabic{solutioncounter} 
+		\stepcounter{solutioncounter}
+		%\setcounter{subproblemcounter}{1}
+		#1
+	}
+}
+
+\newcommand{\judgment}[1]
+{
+	\subsection*{
+		داوری سوال 
+		\arabic{judgmentcounter} 
+		\stepcounter{judgmentcounter}
+		%\setcounter{subproblemcounter}{1}
+		#1
+	}
+}
+
+\newcommand{\judgmentanswer}[1]
+{
+	\subsection*{
+		پاسخ داوری سوال 
+		\arabic{judgmentanswercounter} 
+		\stepcounter{judgmentanswercounter}
+		%\setcounter{subproblemcounter}{1}
+		#1
+	}
+}
+
+%\newcommand{\subproblem}{
+%	\textbf{\harfi{subproblemcounter})}\stepcounter{subproblemcounter}
+%}
+
+
+
+\begin{document}
+\handout
+{تحقیق در عملیات 1}
+{تمرین سری یک}
+{مهدی مستانی، شایان طاهری‌جم، سینا کلانترزاده و متین امینی}
+{0}
+{}
+\problem{} 
+ترجمه صورت سوال را باید اینجا وارد کنید. اگر سوال چندقسمتی است، از محیط زیر استفاده کنید:
+\begin{enumerate}[(a)]
+	\item قسمت اول سوال
+	\item قسمت دوم سوال
+\end{enumerate}
+\solution{} پاسخ سوال را باید اینجا وارد کنید. اگر سوال چندقسمتی است، از محیط زیر استفاده کنید:
+\begin{enumerate}[(a)]
+	\item پاسخ قسمت اول سوال
+	\item پاسخ قسمت دوم سوال
+\end{enumerate}
+برای تعریف یک مساله‌ی برنامه‌ریزی خطی از قالب‌ها و نمونه‌های زیر کمک بگیرید:
+\begin{equation*}
+\left\{
+\begin{array}{cll}
+\min_x &  c^T x & \\
+\mathrm{s.t.} & A x = b, & \\
+& x\ge 0.
+\end{array}  \right.
+\end{equation*}
+
+\begin{equation*}
+\left\{
+\begin{array}{cl}
+\min_{x} &  2x_1 - x_2 + 4 x_3\\
+\mathrm{s.t.} & x_1 + x_2 + x_4 \le 2,\\
+& 3 x_2 - x_3 = 5,\\
+& x_3 + x_4 \ge 2,\\
+& x_1 \ge 0,\\
+& x_2 \le 0.
+\end{array}  \right.
+\end{equation*}
+
+\judgment{}
+گروه پاسخ‌دهنده باید این قسمت را خالی رها کند.\\
+در بخش داوری سوال، گروه مسئول داوری، باید پاسخ را با دقت بررسی کند و آن را از نظر صحیح بودن، مفهوم بودن، کامل بودن و از نظر نگارشی ارزیابی کند. اگر می‌خواهید ویرایش‌های نگارشی خود را در متن پاسخ اعمال کنید باید آن‌ها را با رنگ قرمز مشخص کنید. برای این منظور، از دستور 
+\textcolor{red}{textcolor}
+استفاده کنید. نظرات را در دو بخش جداگانه، یعنی 
+\textbf{تصحیح‌های نگارشی}
+و 
+\textbf{تصحیح‌های علمی}
+به صورت زیر اعلام کنید:
+\begin{itemize}
+	\item 
+	\textbf{تصحیح‌های نگارشی:}
+		\begin{enumerate}
+			\item
+			\item
+		\end{enumerate}
+		\item 
+	\textbf{تصحیح‌های علمی:}
+	\begin{enumerate}
+		\item
+		\item
+	\end{enumerate}
+\end{itemize} 
+در انتهای بخش داوری، باید در یک پاراگراف، یک گزارش کلی از پاسخ ارائه دهید و اعلام کنید که پاسخ قابل قبول است یا نه (با ارائه دلیل کافی)؟ ویرایش جدی نگارشی نیاز دارد یا نه؟ ویرایش علمی نیاز دارد یا نه؟ 
+\judgmentanswer{}
+در بخش پاسخ داوری، باید به تمام نظرات گروه داوری، با ارائه دلایل کافی و به صورت محترمانه پاسخ دهید. قضاوت در مورد این که داوری منصفانه است یا خیر، و پاسخ به آن قابل قبول است یا خیر به عهده دستیاران آموزشی است. مدرس درس به عنوان آخرین مرجع، به این فرایند نظارت خواهد داشت. در زمان بازنگری، تصحیح‌ها و به طور کلی هر تغییری در پاسخ خود را باید با رنگ آبی مشخص کنید. برای این منظور، از دستور 
+\textcolor{blue}{textcolor}
+استفاده کنید.
+\end{document}
